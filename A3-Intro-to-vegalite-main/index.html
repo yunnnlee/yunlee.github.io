@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite-api@5.6.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-tooltip"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+    <link rel="stylesheet" href="style.css" />
+    <script>
+      const options = {
+        config: {
+          // Vega-Lite default configuration
+        },
+        init: (view) => {
+          // initialize tooltip handler
+          view.tooltip(new vegaTooltip.Handler().call);
+        },
+        view: {
+          // view constructor options
+          // remove the loader if you don't want to default to vega-datasets!
+          loader: vega.loader({
+            baseURL: "https://cdn.jsdelivr.net/npm/vega-datasets@2/",
+          }),
+          renderer: "canvas",
+        },
+      };
+
+      // register vega and vega-lite with the API
+      vl.register(vega, vegaLite, options);
+    </script>
+    <style></style>
+  </head>
+  <body>
+    <div class="container">
+
+      <header class="data-description">
+        <h1>Video Game Sales Analysis Report</h1>
+        
+        <section class="intro-section">
+          <h2>Describe the Data</h2>
+          
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Variable Name</th>
+                <th>Data Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Name</td>
+                <td>Categorical (Nominal)</td>
+                <td>The title of the game</td>
+              </tr>
+              <tr>
+                <td>Platform</td>
+                <td>Categorical (Nominal)</td>
+                <td>The hardware the game was released on</td>
+              </tr>
+              <tr>
+                <td>Year</td>
+                <td>Numerical (Discrete)</td>
+                <td>The year of release</td>
+              </tr>
+              <tr>
+                <td>Genre</td>
+                <td>Categorical (Nominal)</td>
+                <td>The style of gameplay</td>
+              </tr>
+              <tr>
+                <td>Publisher</td>
+                <td>Categorical (Nominal)</td>
+                <td>The company that distributed the game</td>
+              </tr>
+              <tr>
+                <td>Regional Sales</td>
+                <td>Numerical (Continuous)</td>
+                <td>Sales in millions for NA, EU, JP, and Other regions</td>
+              </tr>
+              <tr>
+                <td>Global_Sales</td>
+                <td>Numerical (Continuous)</td>
+                <td>The sum total of all regional sales</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="intro-section">
+          <h2>Insights</h2>
+            <ul>
+
+              <li>
+                <h3>Global Mainstream</h3>
+              </li>
+              <p>
+                When analyzing global video game market data, the <strong>Action, Shooter, and Sports</strong> genres function much like "Blockbusters" in the film industry. They are the primary drivers of the market's scale and reach.
+              </p>
+
+              <p>
+                <strong>Persistence:</strong> These genres have consistently commanded the largest share of total sales for decades, transcending temporary trends and serving as the foundation of the industry's annual revenue.
+              </p>
+
+              <p>
+                <strong>Western-Driven Dominance:</strong> The influence of these genres is absolute, particularly in <strong>North American (NA)</strong> and <strong>European (EU)</strong> markets. Their core appeal lies in high-fidelity graphics, competitive mechanics, and intuitive gameplay that resonates with a broad global audience.
+              </p>
+
+              <p>
+ "AAA" titles, games backed by massive capital and large-scale development, are concentrated within these categories, playing a crucial role in expanding the overall market size.                <strong>Commercial Success:</strong> Most
+              </p>
+
+              <li>
+                <h3>Regional Significance</h3>
+              </li>
+              <p>
+                While North America (NA) and Europe (EU) often show similar tastes, favoring Action, Sports, and Shooters, the Japanese (JP) market stands out as a unique case.
+              </p>
+              
+              <p>
+                <strong>Genre Affinity:</strong> In Japan, Role-Playing games consistently outperform Action games in terms of market share per title. This suggests a deep cultural preference for the RPG genre that differs from the global trend.
+              </p>
+              
+              <p>
+                <strong>Platform Loyalty:</strong> Handheld platforms, such as the Nintendo DS and 3DS, show much higher density in the Japanese data. This contrasts with the home-console dominance (like PlayStation and Xbox) typically seen in Western markets.
+              </p>
+            </ul>
+        </section>
+  
+      <section class="chart-section">
+        <h2>Visualization 1 - Question 1</h2>
+        <p>
+          Which genres generate the highest total global sales across all platforms?
+        </p>
+        <div id="view"></div>
+      </section>
+  
+      <section class="chart-section">
+        <h2>Visualization 1 - Question 2</h2>
+        <p>
+          Which platforms dominate sales within each genre?
+        </p>
+        <div id="view2"></div>
+      </section>
+
+      <section class="chart-section">
+        <h2>Visualization 2 - Question 1</h2>
+        <p>How have global sales trends changed for each genre over the years?</p>
+        <div id="view3"></div>
+      </section>
+      
+      <section class="chart-section">
+        <h2>Visualization 2 - Question 2</h2>
+        <p>Which platforms dominated the market share during different time periods?</p>
+        <div id="view4"></div> 
+      </section>
+
+      <section class="chart-section">
+        <h2>Visualization 3 - Question 1</h2>
+        <p>
+          Top 10 Platforms by Sales in Each Region
+        </p>
+        <div id="view5"></div>
+      </section>
+
+      <section class="chart-section">
+        <h2>Visualization 3 - Question 2</h2>
+        <p>
+          What are the regional revenue shares of the top 10 most successful platforms across the global market?
+        </p>
+        <div id="view6"></div>
+      </section>
+
+      <section class="chart-section">
+        <h2>Visualization 4 - Question 1</h2>
+        <p>
+          Compared to the global market, how unique is the Role-Playing genre in the Japanese market in terms of sales volume and proportion?
+        </p>
+        <div id="view7"></div>
+      </section>
+
+      <section class="chart-section">
+        <h2>Visualization 4 - Question 2</h2>
+        <p>
+          What is the share of Nintendo platforms in the global market?
+        </p>
+        <div id="view8"></div>
+      </section>
+  
+    </div>
+  
+    <script type="module" src="vis.js"></script>
+  </body>
+</html>
